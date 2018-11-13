@@ -163,70 +163,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-四月学习总结" class="article article-type-post" itemscope="" itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/11/13/四月学习总结/" class="article-date">
-  	<time datetime="2018-11-13T10:47:53.181Z" itemprop="datePublished">2018-11-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>title: 四月学习总结<br>date: 2018-05-1 17:54:21<br>tags:<br>—# 四月学习总结<br>四月开始是接着三月在看OD的教程，快看完的时候发现有些东西讲的并不怎么详细，然后就买了《逆向工程核心原理》这本书，然后到现在都是一直在看这本书。因为上个月要训练，所以感觉学的不怎么多。</p>
-<h2 id="OD"><a href="#OD" class="headerlink" title="OD"></a>OD</h2><p>拿到一个程序，先运行观察有什么可以利用的东西，例如提示语，字符创，弹出对话框等。字符串可以在OD中使用查看所有字符串来查找，有对话框就证明有<strong>MessageBox（）</strong>可以利用这些特点去寻找入口。<br>可以在适当的位置设置断点、内存访问断点、条件断点等方便调试<br> 例如 ：<br>碰到输入密码的可以经过多次调试后查找用到的地址，然后设置内存断点、观察都有哪些地方用到了输入的东西，慢慢调试观察运算，得到Key的算法</p>
-<p>在调试程序的时候可能会碰到程序有反调试，其调用的函数为<strong>IsDebuggerPresent()</strong>。该函数是被Kernel32.dll导出的,该函数没有参数,如果当前程序正在被调试的话,返回值为1,没有被调试的话,返回值为0。在这种程序中可能还会碰到<strong>PostQuitMessage（）</strong>这个函数，这个函数是用来发送一个WM_QUIT消息 来关闭窗口的 也就是说当<strong>IsDebuggerPresent()</strong>函数检测到程序被调用时可能会调用这个函数来关闭程序。IsDebuggerPresent()这个API其实是读取到了一个特殊位置的字节值，也就是程序开始时EBX所指的区域+2的值。为0 表示未被调试，为1 则表示正在被调试。</p>
-<p> 再往下还看了Visual-Basic程序的破解 </p>
-<h2 id="VB编写应用程序有两种编译方式："><a href="#VB编写应用程序有两种编译方式：" class="headerlink" title="VB编写应用程序有两种编译方式："></a>VB编写应用程序有两种编译方式：</h2><p>1.Native code<br>2.P—code【即Pseudo Code(伪代码)】<br>VB4.0之前只采用Pcode编译、VB5.0后才有Native code编译</p>
-<p><strong>P-code的特征：</strong></p>
-<p>1.MethCallEngine 函数<br>2.代码段入口点以下有大片字码</p>
-<p>VB应用程序都有一个特点<br>开始都是一个PUSH指令,紧接着一个CALL指令调用一个VB API函数。</p>
-<p>在VB程序中经常使用的函数有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> vbastrcomp 比较两个字符串,类似于WINDOWS API函数 lstrcmp</span><br><span class="line">rtcMsgBox   消息框</span><br><span class="line">CreatWindowExA   创建窗口</span><br><span class="line">vbavarxor 两个变量值做异或运算</span><br></pre></td></tr></table></figure></p>
-<p>调试方式与普通的程序区别不大 只是函数名字有些区别</p>
-<h2 id="《逆向工程核心原理》"><a href="#《逆向工程核心原理》" class="headerlink" title="《逆向工程核心原理》"></a>《逆向工程核心原理》</h2><p>在《逆向工程核心原理》这本书中了解到了 栈帧技术<br>栈帧就是利用EBP（栈帧指针）寄存器访问栈内局部变量、参数、函数返回地址的技术手段。<br>调用函数时，会先将函数起始地址（ESP）保存到EBP，并维持在函数内部，这样无论ESP怎么变化，以EBP的值为基准能够安全访问到相关函数的局部变量、参数、返回地址。借助战阵技术管理函数调用时，无论函数有多深、多复杂，调用栈都能得到很好的管理与维护。</p>
-<p> <strong> 栈帧结构 </strong><br>PUSH EBP<br>MOV EBP,ESP</p>
-<p>········</p>
-<p>MOV ESP,EBP<br>POP EBP<br>RETN</p>
-<p>还学习了<a href="https://839050222.github.io/2018/11/13/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A/">数调用约定</a></p>
-<p>再往后就开始了  PE  的学习<br> <strong>PE文件格式</strong><br>PE文件是windows OS 下使用的可执行文件格式。一个.exe文件运行时  如何加载到内存、从何处运行、运行中需要的DLL又哪些、需要多大的栈/堆内存等大量信息，都以结构体形式存储在PE头中。<br> <strong>基本结构</strong><br>1.从DOS头到节区头是PE头部分。文件中使用偏移（offset），内存中使用VA (Virtual Address）来表示位置，文件加载到内存时节区大小、位置等都会发生变化。文件的内容一般可分为代码（.text）、数据（.data）、资源（.rsrc） 节，分别保存。</p>
-<p>2.各节区头定义了各节区在文件或内存中的大小、位置、属性等。文件/内存中节区的起始位置应该在各文件/内存最小单位的倍数位置上，空白区域用NULL填充。<br>3.VA指进程虚拟内存的绝对地址，RVA指从基准位置开始的相对地址,PE头内部信息大多以RVA 形式存在<br>RVA+ImageBase=VA</p>
-<p>DOS头<br>IMAGE_DOS_HEADER结构体的大小为64字节，其中重要的两个成员为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> e_magic: DOS签名（4D5A ASCII&quot;MZ&quot;)；</span><br><span class="line">e_lfanew： 指示NT头的偏移（根据不同文件拥有不同的值）</span><br></pre></td></tr></table></figure></p>
-<p><strong>DOS 存根</strong><br>DOS存根在DOS头下方，可有可无，且大小不固定<br>NT 头   IMAGE_NT_HEADERS<br>这个结构体由3个成员组成，大小为F8。第一个成员为签名（其值为50450000h 即“PE00”）、第二个为文件头（IMAGE_FILE_HEADER)、第三个为可选头（IMAGE_OPTIONAL_HEADER32）</p>
-<p><strong>文件头</strong><br>文件头是表现文件大致属性的结构体,又四个重要的成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Machine				//机器码</span><br><span class="line">NumberOfSections		//用于指出文件中存在的节区数量</span><br><span class="line">SizeOfOptionalHeader	//用来指出可选头结构体的长度</span><br><span class="line">Characteristics		//用于标识文件的属性</span><br></pre></td></tr></table></figure></p>
-<p>若这四个成员设置不正确将导致文件无法正常运行<br><strong>可选头</strong><br>是NT头中最大的结构体，有9个重要的成员<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> Magic</span><br><span class="line">AddressOfEntryPoint</span><br><span class="line">ImageBase</span><br><span class="line">SectionAlignment，FileAlignment</span><br><span class="line">SizeOfImage</span><br><span class="line">SizeOfHeaders</span><br><span class="line">Subsystem</span><br><span class="line">NumberOfRvaAndSizes</span><br><span class="line">DataDirectory</span><br></pre></td></tr></table></figure></p>
-<p>RVA&amp;RAW<br>PE文件加载到内存时，每个节区都要能准确的完成内存地址与文件偏移间的映射。这种映射称为RVA to RAW<br>方法：<br>(1) 查找RVA 所在的节区<br>(2) 使用下面公式计算文件偏移（RAW）<br>RAW=RVA-VirtualAddress+PointerToRawData</p>
-<p>如何用Hex Editor 识别出DOS 存根、IMAGE_FILE_HEADER等部分？<br>答：根据PE规范，IMAGE_DOS_HEADER的大小为64字节，DOS存根区域为40~PE签名区域。紧接PE签名后的是IMAGE_FILE_HEADER，且结构体大小已知。所以说，只要了解各个结构体，便可以用Hex Editor 识别出各个成员</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-      
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-Zombies" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
@@ -261,6 +197,83 @@
 <h2 id="第二部分"><a href="#第二部分" class="headerlink" title="第二部分"></a>第二部分</h2><p>5.在地址上右键—&gt;找出是什么改写了这个地址<br> <img src="//839050222.github.io/2018/11/13/Zombies/图片6.png" alt="图片6"><br>    然后进入游戏，进行操作，修改太阳的数量，CE窗口中就会出现，是哪条指令修改了这个地址<br><img src="//839050222.github.io/2018/11/13/Zombies/图片7.png" alt="图片7"><br>    这里可以看到是使用ADD来修改内存，给【eax+5560】加上了ecx的值，【既<strong>偏移</strong>为5560】单击这条指令，查看详细信息<br><img src="//839050222.github.io/2018/11/13/Zombies/图片8.png" alt="图片8"><br>既然给eax+5560上加，我们就要知道具体的地址，这里CE已经指出了想要查看的指针数值，同时在下面各个寄存器的详细信息中也可以找到EAX的值<br>6.这时候，我们使用CE来搜索这个指针数值，在搜索面板勾选十六进制（或HEX）<br><img src="//839050222.github.io/2018/11/13/Zombies/图片9.png" alt="图片9"><br>使用手动添加地址，选择值不变化的地址，添加偏移，查看是否是我们需要的地址，我在这里尝试后，选择了0237a0a8这个地址<br><img src="//839050222.github.io/2018/11/13/Zombies/图片10.png" alt="图片10"><br>7.添加偏移后，发现指向的值就是我们的太阳数，单击确定，在新添加的这条指令上，右键—&gt;找出是什么访问了这个地址</p>
 <p><img src="//839050222.github.io/2018/11/13/Zombies/图片11.png" alt="图片11"><br><img src="//839050222.github.io/2018/11/13/Zombies/图片12.png" alt="图片12"><br>    可以发现有一堆访问的指令，但是这些地址都很相似，偏移都是768<br><img src="//839050222.github.io/2018/11/13/Zombies/图片13.png" alt="图片13"><br>    随便找一条指令，查看详细信息，<br><img src="//839050222.github.io/2018/11/13/Zombies/图片14.png" alt="图片14"><br>     和第一次一样，使用16进制，搜索地址，找到绿色的地址，绿色的地址就是基址，我们可以使用已知的两个偏移对其进行验证，我们选择第一个绿色的地址，手动添加，按照顺序，添加偏移，可以发现最终指向了我们第一次找到的地址和值<br><img src="//839050222.github.io/2018/11/13/Zombies/图片15.png" alt="图片15"><br>     至此我们已经发现了太阳值所在的基址和两个偏移量，这时候我们就可以利用已知的信息来编写一个算不是辅助的辅助，来获得太阳。</p>
 <h2 id="第三部分"><a href="#第三部分" class="headerlink" title="第三部分"></a>第三部分</h2><font color="#0099ff" size="5" face="黑体">color=#0099ff size=5 face=”黑体”</font>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-四月学习总结" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/01/四月学习总结/" class="article-date">
+  	<time datetime="2018-05-01T09:54:21.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/01/四月学习总结/">
+        四月学习总结
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="四月学习总结"><a href="#四月学习总结" class="headerlink" title="四月学习总结"></a>四月学习总结</h1><p>四月开始是接着三月在看OD的教程，快看完的时候发现有些东西讲的并不怎么详细，然后就买了《逆向工程核心原理》这本书，然后到现在都是一直在看这本书。因为上个月要训练，所以感觉学的不怎么多。</p>
+<h2 id="OD"><a href="#OD" class="headerlink" title="OD"></a>OD</h2><p>拿到一个程序，先运行观察有什么可以利用的东西，例如提示语，字符创，弹出对话框等。字符串可以在OD中使用查看所有字符串来查找，有对话框就证明有<strong>MessageBox（）</strong>可以利用这些特点去寻找入口。<br>可以在适当的位置设置断点、内存访问断点、条件断点等方便调试<br> 例如 ：<br>碰到输入密码的可以经过多次调试后查找用到的地址，然后设置内存断点、观察都有哪些地方用到了输入的东西，慢慢调试观察运算，得到Key的算法</p>
+<p>在调试程序的时候可能会碰到程序有反调试，其调用的函数为<strong>IsDebuggerPresent()</strong>。该函数是被Kernel32.dll导出的,该函数没有参数,如果当前程序正在被调试的话,返回值为1,没有被调试的话,返回值为0。在这种程序中可能还会碰到<strong>PostQuitMessage（）</strong>这个函数，这个函数是用来发送一个WM_QUIT消息 来关闭窗口的 也就是说当<strong>IsDebuggerPresent()</strong>函数检测到程序被调用时可能会调用这个函数来关闭程序。IsDebuggerPresent()这个API其实是读取到了一个特殊位置的字节值，也就是程序开始时EBX所指的区域+2的值。为0 表示未被调试，为1 则表示正在被调试。</p>
+<p> 再往下还看了Visual-Basic程序的破解 </p>
+<h2 id="VB编写应用程序有两种编译方式："><a href="#VB编写应用程序有两种编译方式：" class="headerlink" title="VB编写应用程序有两种编译方式："></a>VB编写应用程序有两种编译方式：</h2><p>1.Native code<br>2.P—code【即Pseudo Code(伪代码)】<br>VB4.0之前只采用Pcode编译、VB5.0后才有Native code编译</p>
+<p><strong>P-code的特征：</strong></p>
+<p>1.MethCallEngine 函数<br>2.代码段入口点以下有大片字码</p>
+<p>VB应用程序都有一个特点<br>开始都是一个PUSH指令,紧接着一个CALL指令调用一个VB API函数。</p>
+<p>在VB程序中经常使用的函数有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> vbastrcomp 比较两个字符串,类似于WINDOWS API函数 lstrcmp</span><br><span class="line">rtcMsgBox   消息框</span><br><span class="line">CreatWindowExA   创建窗口</span><br><span class="line">vbavarxor 两个变量值做异或运算</span><br></pre></td></tr></table></figure></p>
+<p>调试方式与普通的程序区别不大 只是函数名字有些区别</p>
+<h2 id="《逆向工程核心原理》"><a href="#《逆向工程核心原理》" class="headerlink" title="《逆向工程核心原理》"></a>《逆向工程核心原理》</h2><p>在《逆向工程核心原理》这本书中了解到了 栈帧技术<br>栈帧就是利用EBP（栈帧指针）寄存器访问栈内局部变量、参数、函数返回地址的技术手段。<br>调用函数时，会先将函数起始地址（ESP）保存到EBP，并维持在函数内部，这样无论ESP怎么变化，以EBP的值为基准能够安全访问到相关函数的局部变量、参数、返回地址。借助战阵技术管理函数调用时，无论函数有多深、多复杂，调用栈都能得到很好的管理与维护。</p>
+<p> <strong> 栈帧结构 </strong><br>PUSH EBP<br>MOV EBP,ESP</p>
+<p>········</p>
+<p>MOV ESP,EBP<br>POP EBP<br>RETN</p>
+<p>还学习了<a href="https://839050222.github.io/2018/11/13/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E7%BA%A6%E5%AE%9A/">数调用约定</a></p>
+<p>再往后就开始了  PE  的学习<br> <strong>PE文件格式</strong><br>PE文件是windows OS 下使用的可执行文件格式。一个.exe文件运行时  如何加载到内存、从何处运行、运行中需要的DLL又哪些、需要多大的栈/堆内存等大量信息，都以结构体形式存储在PE头中。<br> <strong>基本结构</strong><br>1.从DOS头到节区头是PE头部分。文件中使用偏移（offset），内存中使用VA (Virtual Address）来表示位置，文件加载到内存时节区大小、位置等都会发生变化。文件的内容一般可分为代码（.text）、数据（.data）、资源（.rsrc） 节，分别保存。</p>
+<p>2.各节区头定义了各节区在文件或内存中的大小、位置、属性等。文件/内存中节区的起始位置应该在各文件/内存最小单位的倍数位置上，空白区域用NULL填充。<br>3.VA指进程虚拟内存的绝对地址，RVA指从基准位置开始的相对地址,PE头内部信息大多以RVA 形式存在<br>RVA+ImageBase=VA</p>
+<p>DOS头<br>IMAGE_DOS_HEADER结构体的大小为64字节，其中重要的两个成员为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> e_magic: DOS签名（4D5A ASCII&quot;MZ&quot;)；</span><br><span class="line">e_lfanew： 指示NT头的偏移（根据不同文件拥有不同的值）</span><br></pre></td></tr></table></figure></p>
+<p><strong>DOS 存根</strong><br>DOS存根在DOS头下方，可有可无，且大小不固定<br>NT 头   IMAGE_NT_HEADERS<br>这个结构体由3个成员组成，大小为F8。第一个成员为签名（其值为50450000h 即“PE00”）、第二个为文件头（IMAGE_FILE_HEADER)、第三个为可选头（IMAGE_OPTIONAL_HEADER32）</p>
+<p><strong>文件头</strong><br>文件头是表现文件大致属性的结构体,又四个重要的成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> Machine				//机器码</span><br><span class="line">NumberOfSections		//用于指出文件中存在的节区数量</span><br><span class="line">SizeOfOptionalHeader	//用来指出可选头结构体的长度</span><br><span class="line">Characteristics		//用于标识文件的属性</span><br></pre></td></tr></table></figure></p>
+<p>若这四个成员设置不正确将导致文件无法正常运行<br><strong>可选头</strong><br>是NT头中最大的结构体，有9个重要的成员<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> Magic</span><br><span class="line">AddressOfEntryPoint</span><br><span class="line">ImageBase</span><br><span class="line">SectionAlignment，FileAlignment</span><br><span class="line">SizeOfImage</span><br><span class="line">SizeOfHeaders</span><br><span class="line">Subsystem</span><br><span class="line">NumberOfRvaAndSizes</span><br><span class="line">DataDirectory</span><br></pre></td></tr></table></figure></p>
+<p>RVA&amp;RAW<br>PE文件加载到内存时，每个节区都要能准确的完成内存地址与文件偏移间的映射。这种映射称为RVA to RAW<br>方法：<br>(1) 查找RVA 所在的节区<br>(2) 使用下面公式计算文件偏移（RAW）<br>RAW=RVA-VirtualAddress+PointerToRawData</p>
+<p>如何用Hex Editor 识别出DOS 存根、IMAGE_FILE_HEADER等部分？<br>答：根据PE规范，IMAGE_DOS_HEADER的大小为64字节，DOS存根区域为40~PE签名区域。紧接PE签名后的是IMAGE_FILE_HEADER，且结构体大小已知。所以说，只要了解各个结构体，便可以用Hex Editor 识别出各个成员</p>
+
       
     </div>
     
