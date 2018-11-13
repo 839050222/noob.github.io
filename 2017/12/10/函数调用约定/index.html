@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>函数调用约定 | Vegetable</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="函数调用约定博客很早都已经搭建成功，最近才新换了个interesting的主题。顺便来写下我的第一篇博客。最近在看《逆向工程核心原理》（李承远【韩】 著） 这本书，学到了一些东西。哈哈本人是个菜鸡，拿这个来做一下笔记吧！~这次篇博客用于记录 “函数调用约定” 函数调用约定 Calling Convention 既“函数调用约定”，他是对函数调用时如何传递参数的一种约定。函数调用约定有一下三种： 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数调用约定">
+<meta property="og:url" content="http://839050222.github.io/2017/12/10/函数调用约定/index.html">
+<meta property="og:site_name" content="Vegetable">
+<meta property="og:description" content="函数调用约定博客很早都已经搭建成功，最近才新换了个interesting的主题。顺便来写下我的第一篇博客。最近在看《逆向工程核心原理》（李承远【韩】 著） 这本书，学到了一些东西。哈哈本人是个菜鸡，拿这个来做一下笔记吧！~这次篇博客用于记录 “函数调用约定” 函数调用约定 Calling Convention 既“函数调用约定”，他是对函数调用时如何传递参数的一种约定。函数调用约定有一下三种： 1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-13T10:59:02.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数调用约定">
+<meta name="twitter:description" content="函数调用约定博客很早都已经搭建成功，最近才新换了个interesting的主题。顺便来写下我的第一篇博客。最近在看《逆向工程核心原理》（李承远【韩】 著） 这本书，学到了一些东西。哈哈本人是个菜鸡，拿这个来做一下笔记吧！~这次篇博客用于记录 “函数调用约定” 函数调用约定 Calling Convention 既“函数调用约定”，他是对函数调用时如何传递参数的一种约定。函数调用约定有一下三种： 1">
+  
+    <link rel="alternative" href="/atom.xml" title="Vegetable" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="http://7xkj1z.com1.z0.glb.clouddn.com/head.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/head.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Noob</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Noob</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/head.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Noob</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-函数调用约定" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/10/函数调用约定/" class="article-date">
+  	<time datetime="2017-12-10T09:54:21.000Z" itemprop="datePublished">2017-12-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      函数调用约定
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="函数调用约定"><a href="#函数调用约定" class="headerlink" title="函数调用约定"></a>函数调用约定</h1><p>博客很早都已经搭建成功，最近才新换了个interesting的主题。顺便来写下我的第一篇博客。<br>最近在看《逆向工程核心原理》（李承远【韩】 著） 这本书，学到了一些东西。哈哈本人是个菜鸡，拿这个来做一下笔记吧！~<br>这次篇博客用于记录 “函数调用约定”</p>
+<p><strong>函数调用约定</strong></p>
+<p>Calling Convention 既“函数调用约定”，他是对函数调用时如何传递参数的一种约定。函数调用约定有一下三种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cdecl、  stdcall、 fastcall</span><br></pre></td></tr></table></figure>
+<h2 id="cdecl-c语言默认"><a href="#cdecl-c语言默认" class="headerlink" title="cdecl(c语言默认)"></a>cdecl(c语言默认)</h2><p>cdecl是C语言使用的方式，调用者main（）函数直接清理其压入栈内的函数参数，<br>cdecl方式的好处在于，它可以像C语言的printf（）函数一样，<br>向被调用者传递长度可变的参数。这种长度可变的参数在其他调用约定中很难实现。</p>
+<h2 id="stdcall"><a href="#stdcall" class="headerlink" title="stdcall"></a>stdcall</h2><p>stdcall方式常用于Win32 API 该方式由被调用者清理栈。<br>若想在C语言中使用stdcall方式编译源码，只要使用_stdcall关键字即可</p>
+<p>stdcall方式的好处在于，被调用者函数内部存在着栈清理代码，<br>与每次调用函数时都要用ADD ESP,XXX 命令的方式相比，代码尺寸小</p>
+<h2 id="fastcall"><a href="#fastcall" class="headerlink" title="fastcall"></a>fastcall</h2><p>fastcall方式与stdcall方式基本类似，但是该方式通常会使用寄存器（而非栈内存）去传递那些需要传递给函数的部分参数。<br>其优点在于可以实现对函数的快速调用（寄存器在CPU内部），但是有时需要额外的系统开销来管理ECX,EDX寄存器。若调用函数前ECX与EDX中存有重要数据，那么使用前就必须先备份</p>
+<p>函数调用约定就这些了吧~以后有的继续补充。。。</p>
+<p><strong>小伙子加油！路还很长</strong></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/10/Hexo+Git搭建博客/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">&lt;</strong>
+      <div class="article-nav-title">
+        
+          Hexo+Git搭建博客
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="函数调用约定" data-title="函数调用约定" data-url="http://839050222.github.io/2017/12/10/函数调用约定/" data-images="/img/head.png" data-content="函数调用约定">
+    <div class="ds-share-inline">
+      <ul class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2018 Noob
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
