@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Mr.Beast" />
+
+
+
+<meta name="description" content="Hexo+Github搭建属于自己的博客   在学习中，非常需要一个博客，它不仅可以帮你记录你的劳动成果，最重要的是可以帮你记录你的思想，帮你唤醒当时你在想什么。经过摸索学习，生活中、网络中多个大牛们的帮忙，我也自己搭建了属于自己的博客。刚刚学会，来分享一下，与其他人的教程比较，我的这个教程就显得有些小巫见大巫，有很多不能解决的问题，还请谅解。大概流程：[TOC]  搭建 Node.js环境 搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo+Git搭建博客大概流程">
+<meta property="og:url" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/index.html">
+<meta property="og:site_name" content="VegetableBrid">
+<meta property="og:description" content="Hexo+Github搭建属于自己的博客   在学习中，非常需要一个博客，它不仅可以帮你记录你的劳动成果，最重要的是可以帮你记录你的思想，帮你唤醒当时你在想什么。经过摸索学习，生活中、网络中多个大牛们的帮忙，我也自己搭建了属于自己的博客。刚刚学会，来分享一下，与其他人的教程比较，我的这个教程就显得有些小巫见大巫，有很多不能解决的问题，还请谅解。大概流程：[TOC]  搭建 Node.js环境 搭建">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片1.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片2.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片3.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片4.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片5.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片6.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片7.png">
+<meta property="og:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片8.png">
+<meta property="og:updated_time" content="2018-05-15T14:08:37.447Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo+Git搭建博客大概流程">
+<meta name="twitter:description" content="Hexo+Github搭建属于自己的博客   在学习中，非常需要一个博客，它不仅可以帮你记录你的劳动成果，最重要的是可以帮你记录你的思想，帮你唤醒当时你在想什么。经过摸索学习，生活中、网络中多个大牛们的帮忙，我也自己搭建了属于自己的博客。刚刚学会，来分享一下，与其他人的教程比较，我的这个教程就显得有些小巫见大巫，有很多不能解决的问题，还请谅解。大概流程：[TOC]  搭建 Node.js环境 搭建">
+<meta name="twitter:image" content="http://yoursite.com/2017/12/10/Hexo+Git搭建博客/E/图片1.png">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="VegetableBrid" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>Hexo+Git搭建博客大概流程 | VegetableBrid</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/QQ.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Mr.Beast</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:839050222@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Mr.Beast</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/QQ.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Mr.Beast</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:839050222@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-Hexo+Git搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/10/Hexo+Git搭建博客/" class="article-date">
+      <time datetime="2017-12-10T08:50:40.000Z" itemprop="datePublished">2017-12-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hexo+Git搭建博客大概流程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="Hexo-Github搭建属于自己的博客"><a href="#Hexo-Github搭建属于自己的博客" class="headerlink" title="Hexo+Github搭建属于自己的博客"></a>Hexo+Github搭建属于自己的博客</h2><p>   在学习中，非常需要一个博客，它不仅可以帮你记录你的劳动成果，最重要的是可以帮你记录你的思想，帮你唤醒当时你在想什么。经过摸索学习，生活中、网络中多个大牛们的帮忙，我也自己搭建了属于自己的博客。刚刚学会，来分享一下，与其他人的教程比较，我的这个教程就显得有些小巫见大巫，有很多不能解决的问题，还请谅解。<br><strong>大概流程：</strong><br><code>[TOC]</code></p>
+<ol>
+<li>搭建 Node.js环境</li>
+<li>搭建 Git 环境 </li>
+<li>GitHub 注册和配置 </li>
+<li>安装配置 Hexo  </li>
+<li>关联 Hexo 与 GitHubPages  </li>
+<li>Hexo 的最简单操作—–建立新的文件并部署</li>
+</ol>
+<h2 id="一、搭建-Node-js-环境"><a href="#一、搭建-Node-js-环境" class="headerlink" title="一、搭建 Node.js 环境"></a><strong>一、搭建 Node.js 环境</strong></h2><p>  在 Node.js 官网：<a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a> 下载安装包（随意选啦~~）<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片1.png" alt="p1"><br>一路Next 就行。 当然也可以自己选择安装路径，然后Next到底<br>然后打开命令提示符，依次输入 node -v、npm -v。若出现版本号说明Node.js环境配置成功<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片2.png" alt="p2"></p>
+<h2 id="二、搭建Git环境"><a href="#二、搭建Git环境" class="headerlink" title="二、搭建Git环境"></a><strong>二、搭建Git环境</strong></h2><h1 id="注：此环境用于将本地的网页、文章提交到Github上"><a href="#注：此环境用于将本地的网页、文章提交到Github上" class="headerlink" title="注：此环境用于将本地的网页、文章提交到Github上"></a>注：此环境用于将本地的网页、文章提交到Github上</h1><p>在<a href="https://git-scm.com/" target="_blank" rel="noopener">https://git-scm.com/</a>  里下载安装包 版本自己选就行然后安装<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片3.png" alt="p3"><br>安装完后桌面右键 打开 Git Bash Here，，输入git –version，若出现版本号说明Git环境配置完成</p>
+<h2 id="三、Github-注册和配置"><a href="#三、Github-注册和配置" class="headerlink" title="三、Github 注册和配置"></a><strong>三、Github 注册和配置</strong></h2><p>注册，我就不说啦，自己注册就好，重要的是配置。<br>首先要创建一个仓库：Repository name 一定要使用你的用户名<br>                                Repository name 一定要使用你的用户名<br>                                Repository name 一定要使用你的用户名。（重要的事情说三遍）<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片4.png" alt="p4"><br>图中的 yourname  改为你自己的用户名   如  用户名为 Beast  后面就是 Beast.github.io<br>创建完成后 访问你的地址，若可以访问证明配置成功。</p>
+<h2 id="四、安装配置Hexo"><a href="#四、安装配置Hexo" class="headerlink" title="四、安装配置Hexo"></a><strong>四、安装配置Hexo</strong></h2><p>  这是个什么东西呢？？引用一下：<br>Hexo 是一个快速、简洁且高效的博客框架，使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。想要跟多的了解，请阅读Hexo官方文档  <a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">https://hexo.io/zh-cn/</a> </p>
+<p>使用 npm安装 Hexo：<br>首先，再一个你喜欢的路径建立一个文件夹（名字随意但不能是汉字），在文件夹中右键，打开 Git Bash Here<br>然后输入</p>
+<p><code>npm install hexo-cli -g</code></p>
+<p>可能会看到一个WARN 但是没有关系，放心用就行了，不会有问题。</p>
+<p>最后输入 hexo version 查看Hexo的版本<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片5.png" alt="p5"><br>这时表明你的 hexo 安装完成。接下来就是输入以下命令来初始化 Hexo</p>
+<p>hexo init yourname.github.io<br>使用完这个指令后 你会发现文件夹中多了一个yourname的文件夹，执行后续步骤。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.cd yourname.github.io</span><br><span class="line"></span><br><span class="line">2.npm install</span><br></pre></td></tr></table></figure></p>
+<p>其中的 yourname 改成你自己的用户名<br>完成后文件夹中大概张这样：<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片6.png" alt="p6"></p>
+<p>下一步：运行本地Hexo 服务</p>
+<p>输入 hexo server 或者hexo s</p>
+<p>注：若hexo serve 不能使用，我们可以输入下面这个指令，安装一下 server</p>
+<p>npm install hexo -server –save</p>
+<p>安装完成后就可以使用了。</p>
+<p>然后访问  <a href="http://localhost:4000/" target="_blank" rel="noopener">http://localhost:4000</a> ，若能正常访问，说明本地博客已经搭建成功。接下来我们要做的就是部署到Github上。</p>
+<h2 id="五、关联Github-与-Hexo"><a href="#五、关联Github-与-Hexo" class="headerlink" title="五、关联Github 与 Hexo"></a><strong>五、关联Github 与 Hexo</strong></h2><p>我们用SSH keys 让Hexo与 Github 建立联系。</p>
+<h3 id="第一步：生成-SSH-keys"><a href="#第一步：生成-SSH-keys" class="headerlink" title="第一步：生成 SSH keys"></a>第一步：生成 SSH keys</h3><p>输入指令 ssh-keygen -t rsa -C “youremail”<br>此处 “youremail” 填写你用来接受邮件的邮箱，QQ、163啊什么的都可以</p>
+<p>输入上述代码后，下面会弹出，输入密码，这个密码是你在提交项目的时候用的，可有可无，想设置密码就输入密码后回车；不想要密码就直接连续回车就行。</p>
+<h3 id="第二步：添加刚才生成的SSH-keys到你的Github上"><a href="#第二步：添加刚才生成的SSH-keys到你的Github上" class="headerlink" title="第二步：添加刚才生成的SSH keys到你的Github上"></a>第二步：添加刚才生成的SSH keys到你的Github上</h3><p>因为我们刚才第一步设置的盘是C盘  所以你会在你的C盘C:\Users\里找到一个 .ssh的文件夹，打开它，找到一个叫id_rsa.pub的文件  这就是我们刚才生成的密钥，将这个文件用记事本打开，复制里面的所有内容粘贴到  <a href="https://github.com/settings/ssh" target="_blank" rel="noopener">https://github.com/settings/ssh</a>  中的 new SSH key中，保存即可。<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片7.png" alt="p7"></p>
+<h3 id="第三步：测试是否设置成功"><a href="#第三步：测试是否设置成功" class="headerlink" title="第三步：测试是否设置成功"></a>第三步：测试是否设置成功</h3><p>输入指令 ssh -T git@github.com<br>会出现一个提示，直接输入yes回车就行，然后就会看到<br>Hi You’ve successfully …………(不打了，偷下懒）</p>
+<h3 id="第四步：配置Git个人信息"><a href="#第四步：配置Git个人信息" class="headerlink" title="第四步：配置Git个人信息"></a>第四步：配置Git个人信息</h3><p>从英文提示可以看到，已经链接成功，但是需要完善个人信息<br>输入下面的指令：<br>git config –global user.name “yourname”(yourname改为你的用户名）<br>git config –global user.email “youremail”（youremail改为你的邮箱）</p>
+<h3 id="第五步：配置Deployment"><a href="#第五步：配置Deployment" class="headerlink" title="第五步：配置Deployment"></a>第五步：配置Deployment</h3><p>找到_config.yml文件，用记事本打开，找到最后（应该在最后）的Deployment，修改如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>和上面一样将yourname改为你的用户名</p>
+<h3 id="第六步：提交本地文件到Github"><a href="#第六步：提交本地文件到Github" class="headerlink" title="第六步：提交本地文件到Github"></a>第六步：提交本地文件到Github</h3><p>依次输入下列指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean   //用于删除旧的 public文件夹</span><br><span class="line">hexo generate 或hexo g  //用于生成新的public 文件夹</span><br><span class="line">hexo deploye 或 hexo d  // 开始部署</span><br></pre></td></tr></table></figure></p>
+<p>若上述失败，需要安装一个扩展<br>输入指令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>注：若hexo clean指令错误不能用，请参考图片中的解决方法<br><img src="/2017/12/10/Hexo+Git搭建博客/E/图片8.png" alt="p8"></p>
+<p>完成后 进入 https：//yourname.github.io （同样yourname改成你的用户名），你会看到跟第一次进入时不一样了，它与Hexo成功关联了。</p>
+<p>输入指令  hexo new “文件名称”   //这时 会在source文件夹中建立一个新的文件，可以  打开编辑；也可以自己在source文件夹中自己创建文  件，两个是异曲同工</p>
+<p>文章编译好后，运行生成、部署指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure></p>
+<p>完成后等待大概一分钟，就可以在你的  yourname.giyhub.io 中看到</p>
+<p>若想要删除文章，只需要在本地source文件夹中删除文件，然后执行 生成、部署指令即可</p>
+<p>由于本人是个新手，所以可能会有错误，希望大家指出来，十分感谢！！！</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/12/10/Hexo+Git搭建博客/">Hexo+Git搭建博客大概流程</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr.Beast</a></p>
+        <p><span>发布时间:</span>2017-12-10, 16:50:40</p>
+        <p><span>最后更新:</span>2018-05-15, 22:08:37</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/12/10/Hexo+Git搭建博客/" title="Hexo+Git搭建博客大概流程">http://yoursite.com/2017/12/10/Hexo+Git搭建博客/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2017/12/10/Hexo+Git搭建博客/　　作者: Mr.Beast" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/04/11/Linux操作指令/">
+                    Linux操作命令
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hexo-Github搭建属于自己的博客"><span class="toc-number">1.</span> <span class="toc-text"><a href="#Hexo-Github&#x642D;&#x5EFA;&#x5C5E;&#x4E8E;&#x81EA;&#x5DF1;&#x7684;&#x535A;&#x5BA2;" class="headerlink" title="Hexo+Github&#x642D;&#x5EFA;&#x5C5E;&#x4E8E;&#x81EA;&#x5DF1;&#x7684;&#x535A;&#x5BA2;"></a>Hexo+Github&#x642D;&#x5EFA;&#x5C5E;&#x4E8E;&#x81EA;&#x5DF1;&#x7684;&#x535A;&#x5BA2;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一、搭建-Node-js-环境"><span class="toc-number">2.</span> <span class="toc-text"><a href="#&#x4E00;&#x3001;&#x642D;&#x5EFA;-Node-js-&#x73AF;&#x5883;" class="headerlink" title="&#x4E00;&#x3001;&#x642D;&#x5EFA; Node.js &#x73AF;&#x5883;"></a><strong>&#x4E00;&#x3001;&#x642D;&#x5EFA; Node.js &#x73AF;&#x5883;</strong></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、搭建Git环境"><span class="toc-number">3.</span> <span class="toc-text"><a href="#&#x4E8C;&#x3001;&#x642D;&#x5EFA;Git&#x73AF;&#x5883;" class="headerlink" title="&#x4E8C;&#x3001;&#x642D;&#x5EFA;Git&#x73AF;&#x5883;"></a><strong>&#x4E8C;&#x3001;&#x642D;&#x5EFA;Git&#x73AF;&#x5883;</strong></span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注：此环境用于将本地的网页、文章提交到Github上"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x6CE8;&#xFF1A;&#x6B64;&#x73AF;&#x5883;&#x7528;&#x4E8E;&#x5C06;&#x672C;&#x5730;&#x7684;&#x7F51;&#x9875;&#x3001;&#x6587;&#x7AE0;&#x63D0;&#x4EA4;&#x5230;Github&#x4E0A;" class="headerlink" title="&#x6CE8;&#xFF1A;&#x6B64;&#x73AF;&#x5883;&#x7528;&#x4E8E;&#x5C06;&#x672C;&#x5730;&#x7684;&#x7F51;&#x9875;&#x3001;&#x6587;&#x7AE0;&#x63D0;&#x4EA4;&#x5230;Github&#x4E0A;"></a>&#x6CE8;&#xFF1A;&#x6B64;&#x73AF;&#x5883;&#x7528;&#x4E8E;&#x5C06;&#x672C;&#x5730;&#x7684;&#x7F51;&#x9875;&#x3001;&#x6587;&#x7AE0;&#x63D0;&#x4EA4;&#x5230;Github&#x4E0A;</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Github-注册和配置"><span class="toc-number">1.</span> <span class="toc-text"><a href="#&#x4E09;&#x3001;Github-&#x6CE8;&#x518C;&#x548C;&#x914D;&#x7F6E;" class="headerlink" title="&#x4E09;&#x3001;Github &#x6CE8;&#x518C;&#x548C;&#x914D;&#x7F6E;"></a><strong>&#x4E09;&#x3001;Github &#x6CE8;&#x518C;&#x548C;&#x914D;&#x7F6E;</strong></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、安装配置Hexo"><span class="toc-number">2.</span> <span class="toc-text"><a href="#&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x914D;&#x7F6E;Hexo" class="headerlink" title="&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x914D;&#x7F6E;Hexo"></a><strong>&#x56DB;&#x3001;&#x5B89;&#x88C5;&#x914D;&#x7F6E;Hexo</strong></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、关联Github-与-Hexo"><span class="toc-number">3.</span> <span class="toc-text"><a href="#&#x4E94;&#x3001;&#x5173;&#x8054;Github-&#x4E0E;-Hexo" class="headerlink" title="&#x4E94;&#x3001;&#x5173;&#x8054;Github &#x4E0E; Hexo"></a><strong>&#x4E94;&#x3001;&#x5173;&#x8054;Github &#x4E0E; Hexo</strong></span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：生成-SSH-keys"><span class="toc-number">3.1.</span> <span class="toc-text"><a href="#&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x751F;&#x6210;-SSH-keys" class="headerlink" title="&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x751F;&#x6210; SSH keys"></a>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x751F;&#x6210; SSH keys</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：添加刚才生成的SSH-keys到你的Github上"><span class="toc-number">3.2.</span> <span class="toc-text"><a href="#&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x6DFB;&#x52A0;&#x521A;&#x624D;&#x751F;&#x6210;&#x7684;SSH-keys&#x5230;&#x4F60;&#x7684;Github&#x4E0A;" class="headerlink" title="&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x6DFB;&#x52A0;&#x521A;&#x624D;&#x751F;&#x6210;&#x7684;SSH keys&#x5230;&#x4F60;&#x7684;Github&#x4E0A;"></a>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x6DFB;&#x52A0;&#x521A;&#x624D;&#x751F;&#x6210;&#x7684;SSH keys&#x5230;&#x4F60;&#x7684;Github&#x4E0A;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：测试是否设置成功"><span class="toc-number">3.3.</span> <span class="toc-text"><a href="#&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x8BBE;&#x7F6E;&#x6210;&#x529F;" class="headerlink" title="&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x8BBE;&#x7F6E;&#x6210;&#x529F;"></a>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x8BBE;&#x7F6E;&#x6210;&#x529F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四步：配置Git个人信息"><span class="toc-number">3.4.</span> <span class="toc-text"><a href="#&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;Git&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;" class="headerlink" title="&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;Git&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;"></a>&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;Git&#x4E2A;&#x4EBA;&#x4FE1;&#x606F;</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第五步：配置Deployment"><span class="toc-number">3.5.</span> <span class="toc-text"><a href="#&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;Deployment" class="headerlink" title="&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;Deployment"></a>&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x914D;&#x7F6E;Deployment</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第六步：提交本地文件到Github"><span class="toc-number">3.6.</span> <span class="toc-text"><a href="#&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x63D0;&#x4EA4;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x5230;Github" class="headerlink" title="&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x63D0;&#x4EA4;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x5230;Github"></a>&#x7B2C;&#x516D;&#x6B65;&#xFF1A;&#x63D0;&#x4EA4;&#x672C;&#x5730;&#x6587;&#x4EF6;&#x5230;Github</span></a></li></ol></li></ol>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/04/11/Linux操作指令/" title="上一篇: Linux操作命令">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/部分IDC函数/">部分IDC函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/静态反调试/">静态反调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/07/SEH/">SEH</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/PEB/">PEB</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/TEB/">TEB</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/TLS/">TLS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/12周总结/">12周学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/四月学习总结/">四月学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Test/">Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/VB的一点点笔记/">VB 的小笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/函数调用约定/">函数调用约定</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/11/Linux操作指令/">Linux操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/10/Hexo+Git搭建博客/">Hexo+Git搭建博客大概流程</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 Mr.Beast
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 7;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

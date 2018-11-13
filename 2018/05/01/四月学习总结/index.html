@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Mr.Beast" />
+
+
+
+<meta name="description" content="四月开始是接着三月在看OD的教程，快看完的时候发现有些东西讲的并不怎么详细，然后就买了《逆向工程核心原理》这本书，然后到现在都是一直在看这本书。因为上个月要训练，所以感觉学的不怎么多。 OD拿到一个程序，先运行观察有什么可以利用的东西，例如提示语，字符创，弹出对话框等。字符串可以在OD中使用查看所有字符串来查找，有对话框就证明有MessageBox（）可以利用这些特点去寻找入口。可以在适当的位置设">
+<meta property="og:type" content="article">
+<meta property="og:title" content="四月学习总结">
+<meta property="og:url" content="http://yoursite.com/2018/05/01/四月学习总结/index.html">
+<meta property="og:site_name" content="VegetableBrid">
+<meta property="og:description" content="四月开始是接着三月在看OD的教程，快看完的时候发现有些东西讲的并不怎么详细，然后就买了《逆向工程核心原理》这本书，然后到现在都是一直在看这本书。因为上个月要训练，所以感觉学的不怎么多。 OD拿到一个程序，先运行观察有什么可以利用的东西，例如提示语，字符创，弹出对话框等。字符串可以在OD中使用查看所有字符串来查找，有对话框就证明有MessageBox（）可以利用这些特点去寻找入口。可以在适当的位置设">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-12T07:53:57.531Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="四月学习总结">
+<meta name="twitter:description" content="四月开始是接着三月在看OD的教程，快看完的时候发现有些东西讲的并不怎么详细，然后就买了《逆向工程核心原理》这本书，然后到现在都是一直在看这本书。因为上个月要训练，所以感觉学的不怎么多。 OD拿到一个程序，先运行观察有什么可以利用的东西，例如提示语，字符创，弹出对话框等。字符串可以在OD中使用查看所有字符串来查找，有对话框就证明有MessageBox（）可以利用这些特点去寻找入口。可以在适当的位置设">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="VegetableBrid" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/favicon.png">
+
+
+
+    <link href="//cdn.bootcss.com/animate.css/3.5.1/animate.min.css" rel="stylesheet">
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>四月学习总结 | VegetableBrid</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: true,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: 
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/QQ.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Mr.Beast</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" href="mailto:839050222@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://moxfive.xyz/">MOxFIVE</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于前端</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Mr.Beast</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/QQ.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Mr.Beast</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa Email" target="_blank" href="mailto:839050222@qq.com" title="Email"></a>
+                            
+                                <a class="fa GitHub" target="_blank" href="#" title="GitHub"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-四月学习总结" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/05/01/四月学习总结/" class="article-date">
+      <time datetime="2018-05-01T15:18:43.000Z" itemprop="datePublished">2018-05-01</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      四月学习总结
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>四月开始是接着三月在看OD的教程，快看完的时候发现有些东西讲的并不怎么详细，然后就买了《逆向工程核心原理》这本书，然后到现在都是一直在看这本书。因为上个月要训练，所以感觉学的不怎么多。</p>
+<h4 id="OD"><a href="#OD" class="headerlink" title="OD"></a>OD</h4><p>拿到一个程序，先运行观察有什么可以利用的东西，例如提示语，字符创，弹出对话框等。字符串可以在OD中使用查看所有字符串来查找，有对话框就证明有MessageBox（）可以利用这些特点去寻找入口。<br>可以在适当的位置设置断点、内存访问断点、条件断点等方便调试<br><strong><em> 例如 </em></strong>：<br>碰到输入密码的可以经过多次调试后查找用到的地址，然后设置内存断点、观察都有哪些地方用到了输入的东西，慢慢调试观察运算，得到Key的算法</p>
+<p>在调试程序的时候可能会碰到程序有反调试，其调用的函数为IsDebuggerPresent()。该函数是被Kernel32.dll导出的,该函数没有参数,如果当前程序正在被调试的话,返回值为1,没有被调试的话,返回值为0。在这种程序中可能还会碰到PostQuitMessage（）这个函数，这个函数是用来发送一个WM_QUIT消息 来关闭窗口的   也就是说当IsDebuggerPresent()函数检测到程序被调用时可能会调用这个函数来关闭程序。IsDebuggerPresent()这个API其实是读取到了一个特殊位置的字节值，也就是程序开始时EBX所指的区域+2的值。为0 表示未被调试，为1 则表示正在被调试。</p>
+<p><strong> 再往下还看了Visual-Basic程序的破解 </strong></p>
+<h4 id="VB编写应用程序有两种编译方式："><a href="#VB编写应用程序有两种编译方式：" class="headerlink" title="VB编写应用程序有两种编译方式："></a>VB编写应用程序有两种编译方式：</h4><p>1.Native code<br>2.P—code【即Pseudo Code(伪代码)】<br>VB4.0之前只采用Pcode编译、VB5.0后才有Native code编译</p>
+<h4 id="P-code的特征："><a href="#P-code的特征：" class="headerlink" title="P-code的特征："></a>P-code的特征：</h4><p>1.MethCallEngine 函数<br>2.代码段入口点以下有大片字码</p>
+<p>VB应用程序都有一个特点<br>开始都是一个PUSH指令,紧接着一个CALL指令调用一个VB API函数。</p>
+<p>在VB程序中经常使用的函数有：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vbastrcomp 比较两个字符串,类似于WINDOWS API函数 lstrcmp</span><br><span class="line">rtcMsgBox   消息框</span><br><span class="line">CreatWindowExA   创建窗口</span><br><span class="line">vbavarxor 两个变量值做异或运算</span><br></pre></td></tr></table></figure></p>
+<p>调试方式与普通的程序区别不大 只是函数名字有些区别</p>
+<h2 id="《逆向工程核心原理》"><a href="#《逆向工程核心原理》" class="headerlink" title="《逆向工程核心原理》"></a>《逆向工程核心原理》</h2><p>在《逆向工程核心原理》这本书中了解到了<strong> 栈帧技术 </strong><br>栈帧就是利用EBP（栈帧指针）寄存器访问栈内局部变量、参数、函数返回地址的技术手段。<br>调用函数时，会先将函数起始地址（ESP）保存到EBP，并维持在函数内部，这样无论ESP怎么变化，以EBP的值为基准能够安全访问到相关函数的局部变量、参数、返回地址。借助战阵技术管理函数调用时，无论函数有多深、多复杂，调用栈都能得到很好的管理与维护。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">** 栈帧结构 **</span><br><span class="line">PUSH EBP</span><br><span class="line">MOV EBP,ESP</span><br><span class="line"></span><br><span class="line">········</span><br><span class="line"></span><br><span class="line">MOV ESP,EBP</span><br><span class="line">POP EBP</span><br><span class="line">RETN</span><br></pre></td></tr></table></figure></p>
+<p>还学习了<a href="https://839050222.github.io/2018/04/12/函数调用约定/" target="_blank" rel="noopener">函数调用约定</a></p>
+<p> 再往后就开始了 <strong> PE </strong> 的学习<br><strong> PE文件格式 </strong><br>PE文件是windows OS 下使用的可执行文件格式。一个.exe文件运行时  <strong> 如何加载到内存、从何处运行、运行中需要的DLL又哪些、需要多大的栈/堆内存等大量信息</strong>，都以结构体形式存储在PE头中。<br><strong> 基本结构 </strong><br>1.从DOS头到节区头是PE头部分。文件中使用偏移（offset），内存中使用VA (Virtual Address）来表示位置，文件加载到内存时节区大小、位置等都会发生变化。文件的内容一般可分为代码（.text）、数据（.data）、资源（.rsrc） 节，分别保存。</p>
+<p>2.各节区头定义了各节区在文件或内存中的大小、位置、属性等。文件/内存中节区的起始位置应该在各文件/内存最小单位的倍数位置上，空白区域用NULL填充。<br>3.VA指进程虚拟内存的绝对地址，RVA指从基准位置开始的相对地址,PE头内部信息大多以RVA 形式存在<br><code>RVA+ImageBase=VA</code></p>
+<p><strong>DOS头</strong><br>IMAGE_DOS_HEADER结构体的大小为64字节，其中重要的两个成员为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">e_magic: DOS签名（4D5A ASCII&quot;MZ&quot;)；</span><br><span class="line">e_lfanew： 指示NT头的偏移（根据不同文件拥有不同的值）</span><br></pre></td></tr></table></figure></p>
+<p><strong>DOS 存根</strong><br>DOS存根在DOS头下方，可有可无，且大小不固定<br><strong>NT 头   IMAGE_NT_HEADERS </strong><br>这个结构体由3个成员组成，大小为F8。第一个成员为签名（其值为50450000h  即“PE00”）、第二个为文件头（IMAGE_FILE_HEADER)、第三个为可选头（IMAGE_OPTIONAL_HEADER32）</p>
+<p><em>文件头</em><br>文件头是表现文件大致属性的结构体,又四个重要的成员：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Machine				//机器码</span><br><span class="line">NumberOfSections		//用于指出文件中存在的节区数量</span><br><span class="line">SizeOfOptionalHeader	//用来指出可选头结构体的长度</span><br><span class="line">Characteristics		//用于标识文件的属性</span><br></pre></td></tr></table></figure></p>
+<p>若这四个成员设置不正确将导致文件无法正常运行<br><em>可选头</em><br>是NT头中最大的结构体，有9个重要的成员<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Magic</span><br><span class="line">AddressOfEntryPoint</span><br><span class="line">ImageBase</span><br><span class="line">SectionAlignment，FileAlignment</span><br><span class="line">SizeOfImage</span><br><span class="line">SizeOfHeaders</span><br><span class="line">Subsystem</span><br><span class="line">NumberOfRvaAndSizes</span><br><span class="line">DataDirectory</span><br></pre></td></tr></table></figure></p>
+<p><strong>RVA&amp;RAW</strong><br>PE文件加载到内存时，每个节区都要能准确的完成内存地址与文件偏移间的映射。这种映射称为RVA to RAW<br>方法：<br>(1) 查找RVA 所在的节区<br>(2) 使用下面公式计算文件偏移（RAW）<br><code>RAW=RVA-VirtualAddress+PointerToRawData</code></p>
+<p><strong>如何用Hex Editor 识别出DOS 存根、IMAGE_FILE_HEADER等部分？</strong><br>答：根据PE规范，IMAGE_DOS_HEADER的大小为64字节，DOS存根区域为40~PE签名区域。紧接PE签名后的是IMAGE_FILE_HEADER，且结构体大小已知。所以说，只要了解各个结构体，便可以用Hex Editor 识别出各个成员</p>
+<h2 id="Linux操作命令"><a href="#Linux操作命令" class="headerlink" title="Linux操作命令"></a>Linux操作命令</h2><p>还了解了几个<a href="https://839050222.github.io/2018/04/11/Linux操作指令/" target="_blank" rel="noopener">Linux操作命令</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2018/05/01/四月学习总结/">四月学习总结</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Mr.Beast</a></p>
+        <p><span>发布时间:</span>2018-05-01, 23:18:43</p>
+        <p><span>最后更新:</span>2018-05-12, 15:53:57</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2018/05/01/四月学习总结/" title="四月学习总结">http://yoursite.com/2018/05/01/四月学习总结/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2018/05/01/四月学习总结/　　作者: Mr.Beast" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2018/05/26/12周总结/">
+                    12周学习总结
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2018/04/24/Test/">
+                    Test
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#OD"><span class="toc-number">1.</span> <span class="toc-text"><a href="#OD" class="headerlink" title="OD"></a>OD</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VB编写应用程序有两种编译方式："><span class="toc-number">2.</span> <span class="toc-text"><a href="#VB&#x7F16;&#x5199;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6709;&#x4E24;&#x79CD;&#x7F16;&#x8BD1;&#x65B9;&#x5F0F;&#xFF1A;" class="headerlink" title="VB&#x7F16;&#x5199;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6709;&#x4E24;&#x79CD;&#x7F16;&#x8BD1;&#x65B9;&#x5F0F;&#xFF1A;"></a>VB&#x7F16;&#x5199;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6709;&#x4E24;&#x79CD;&#x7F16;&#x8BD1;&#x65B9;&#x5F0F;&#xFF1A;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#P-code的特征："><span class="toc-number">3.</span> <span class="toc-text"><a href="#P-code&#x7684;&#x7279;&#x5F81;&#xFF1A;" class="headerlink" title="P-code&#x7684;&#x7279;&#x5F81;&#xFF1A;"></a>P-code&#x7684;&#x7279;&#x5F81;&#xFF1A;</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#《逆向工程核心原理》"><span class="toc-number"></span> <span class="toc-text"><a href="#&#x300A;&#x9006;&#x5411;&#x5DE5;&#x7A0B;&#x6838;&#x5FC3;&#x539F;&#x7406;&#x300B;" class="headerlink" title="&#x300A;&#x9006;&#x5411;&#x5DE5;&#x7A0B;&#x6838;&#x5FC3;&#x539F;&#x7406;&#x300B;"></a>&#x300A;&#x9006;&#x5411;&#x5DE5;&#x7A0B;&#x6838;&#x5FC3;&#x539F;&#x7406;&#x300B;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux操作命令"><span class="toc-number"></span> <span class="toc-text"><a href="#Linux&#x64CD;&#x4F5C;&#x547D;&#x4EE4;" class="headerlink" title="Linux&#x64CD;&#x4F5C;&#x547D;&#x4EE4;"></a>Linux&#x64CD;&#x4F5C;&#x547D;&#x4EE4;</span></a>
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+
+
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2018/05/26/12周总结/" title="上一篇: 12周学习总结">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2018/04/24/Test/" title="下一篇: Test">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/07/31/部分IDC函数/">部分IDC函数</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/07/22/静态反调试/">静态反调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/07/SEH/">SEH</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/03/PEB/">PEB</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/TEB/">TEB</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/29/TLS/">TLS</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/26/12周总结/">12周学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/01/四月学习总结/">四月学习总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/24/Test/">Test</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/VB的一点点笔记/">VB 的小笔记</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/函数调用约定/">函数调用约定</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/11/Linux操作指令/">Linux操作命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/10/Hexo+Git搭建博客/">Hexo+Git搭建博客大概流程</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016-2018 Mr.Beast
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 7;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
