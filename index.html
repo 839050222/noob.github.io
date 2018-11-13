@@ -163,6 +163,135 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-Test" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/13/Test/" class="article-date">
+  	<time datetime="2018-11-13T10:32:56.000Z" itemprop="datePublished">2018-11-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/13/Test/">
+        Test
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="markdown中添加本地图片和添加超链"><a href="#markdown中添加本地图片和添加超链" class="headerlink" title="markdown中添加本地图片和添加超链"></a><strong>markdown中添加本地图片和添加超链</strong></h1><p>了解了本地图片用于博客上，先搞几个进行测试</p>
+<p><img src="//839050222.github.io/2018/11/13/Test/1.jpg" alt="(⊙o⊙)"><br><a href="Test/链接.txt">点击下载</a><br><img src="//839050222.github.io/2018/11/13/Test/123.jpg" alt=""><br><img src="//839050222.github.io/2018/11/13/Test/456.jpg" alt=""></p>
+<h2 id="使用图片"><a href="#使用图片" class="headerlink" title="使用图片"></a>使用图片</h2><p> 需要打开博客根目录下 _config.yml 文件  <strong>修改post_asset_folder</strong>  为true<br><img src="//839050222.github.io/2018/11/13/Test/1.png" alt=""><br>随后下载 image插件  使用下面命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure></p>
+<p>这个插件用于上传本地图片<br>等待一会儿，使用命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n &quot;XXX&quot;</span><br></pre></td></tr></table></figure></p>
+<p>你会发现 source文件夹中有一个XXX.md和文件夹<br>将需要用的图片放在文件夹里，然后正常写文章，在需要用图片的地方</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![命名](XXX/文件夹中图片名.后缀名)</span><br></pre></td></tr></table></figure>
+<p>需要注意的是 符号都需要使用英文的符号</p>
+<p>例如,使用文件夹名为ABC里面的图片,图片名为abc.jpg<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![name](ABC/abc.jpg)</span><br></pre></td></tr></table></figure></p>
+<h2 id="添加超链"><a href="#添加超链" class="headerlink" title="添加超链"></a>添加超链</h2><p>语法很简单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[超链接名](超链接地址)</span><br></pre></td></tr></table></figure></p>
+<p>例如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[百度](www.baidu.com)</span><br></pre></td></tr></table></figure></p>
+<p>效果就是这样   <a href="www.baidu.com">百度</a></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-函数调用约定" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/11/13/函数调用约定/" class="article-date">
+  	<time datetime="2018-11-13T10:30:29.000Z" itemprop="datePublished">2018-11-13</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/13/函数调用约定/">
+        d
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="函数调用约定"><a href="#函数调用约定" class="headerlink" title="函数调用约定"></a>函数调用约定</h1><p>博客很早都已经搭建成功，最近才新换了个interesting的主题。顺便来写下我的第一篇博客。<br>最近在看《逆向工程核心原理》（李承远【韩】 著） 这本书，学到了一些东西。哈哈本人是个菜鸡，拿这个来做一下笔记吧！~<br>这次篇博客用于记录 “函数调用约定”</p>
+<p><strong>函数调用约定</strong></p>
+<p>Calling Convention 既“函数调用约定”，他是对函数调用时如何传递参数的一种约定。函数调用约定有一下三种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cdecl、  stdcall、 fastcall</span><br></pre></td></tr></table></figure>
+<h2 id="cdecl-c语言默认"><a href="#cdecl-c语言默认" class="headerlink" title="cdecl(c语言默认)"></a>cdecl(c语言默认)</h2><p>cdecl是C语言使用的方式，调用者main（）函数直接清理其压入栈内的函数参数，<br>cdecl方式的好处在于，它可以像C语言的printf（）函数一样，<br>向被调用者传递长度可变的参数。这种长度可变的参数在其他调用约定中很难实现。</p>
+<h2 id="stdcall"><a href="#stdcall" class="headerlink" title="stdcall"></a>stdcall</h2><p>stdcall方式常用于Win32 API 该方式由被调用者清理栈。<br>若想在C语言中使用stdcall方式编译源码，只要使用_stdcall关键字即可</p>
+<p>stdcall方式的好处在于，被调用者函数内部存在着栈清理代码，<br>与每次调用函数时都要用ADD ESP,XXX 命令的方式相比，代码尺寸小</p>
+<h2 id="fastcall"><a href="#fastcall" class="headerlink" title="fastcall"></a>fastcall</h2><p>fastcall方式与stdcall方式基本类似，但是该方式通常会使用寄存器（而非栈内存）去传递那些需要传递给函数的部分参数。<br>其优点在于可以实现对函数的快速调用（寄存器在CPU内部），但是有时需要额外的系统开销来管理ECX,EDX寄存器。若调用函数前ECX与EDX中存有重要数据，那么使用前就必须先备份</p>
+<p>函数调用约定就这些了吧~以后有的继续补充。。。</p>
+<p><strong>小伙子加油！路还很长</strong></p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Zombies" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
