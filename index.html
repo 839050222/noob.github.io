@@ -163,6 +163,53 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-TEB" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2018/12/23/TEB/" class="article-date">
+  	<time datetime="2018-12-23T11:26:01.756Z" itemprop="datePublished">2018-12-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>TEB </p>
+<p><strong>TEB</strong><br>TEB指线程环境块，该结构体包含进程中运行线程的各种信息，进程中的每个线程都对应一个TEB结构体。不同的OS中TEB结构体形态略微不同<br>TEB重要成员<br>在用户模式调试中有两个成员起着重要的作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">TEB重要成员</span><br><span class="line">+0x000    NtTib			: _NT_TIB</span><br><span class="line">· · · · </span><br><span class="line">+0x030	  ProcessEnvironmentBlock  :   Ptr32  _PEB</span><br></pre></td></tr></table></figure>
+<p>ProcessEnvironmentBlock<br>ProcessEnvironmentBlock是指向PEB结构体的指针（Process Environment Block，PEB 进程环境块，每个进程对应一个PEB结构体）<br>NtTib<br>TEB结构体的第一个成员为_NT_TIB结构体（TIB Thread Information Block 线程信息块）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">_NT_TIB结构体</span><br><span class="line">typedef struct _NT_TIB&#123;</span><br><span class="line">	struct _EXCEPTION_REGISTRATION_RECORD *ExceptionLIst;</span><br><span class="line">	PVOID  StackBase;</span><br><span class="line">	PVOID  StackLimit;</span><br><span class="line">	PVOID  SubSystemTib;</span><br><span class="line">	union&#123;</span><br><span class="line">		PVOID FiberData;</span><br><span class="line">		DWORD Version;</span><br><span class="line">		&#125;;</span><br><span class="line">	PVOID  ArbitraryUserPointer;</span><br><span class="line">	struct _NT_TIB *Self;</span><br><span class="line">&#125;NT_TIB;</span><br><span class="line"></span><br><span class="line">typedef NT_TIB *PNT_TIB;</span><br></pre></td></tr></table></figure></p>
+<p>第一个成员ExceptionLIst 指向_EXCEPTION_REGISTRATION_RECORD结构体组成的链表，用于Windows OS的SEH<br>SEH(“Structured Exception Handling”),即结构化异常处理·是(windows)操作系统提供给程序设计者的强有力的处理程序错误或异常的武器。<br>来自百度百科<br>最后一个Self成员是_NT_TIB结构体的自引用指针，也是TEB结构体的指针（因为TEB结构体的第一个成员就是 _NT_TIB结构体）<br>TEB访问方法<br>使用OS提供的API来访问TEB<br>Ntdll.NtCurrentTeb()<br>Ntdll.NtCurrentTeb()API用于返回当前线程的TEB结构体的地址。<br>TEB结构体的地址，与FS段寄存器所指的段内存的基地址是一样的。也就是说TEB结构体与FS段寄存器有着某种联系<br>FS段寄存器用来指示当前线程的TEB结构体，但是并非直接指向TEB结构体的地址，它持有SDT索引，该索引持有实际TEB的地址<br>SDT位于内核内存区域，其地址存储在特殊的寄存器GDTR中（GDTR 全局描述符表寄存器 Global Descriptor Table Resiger）</p>
+<p>FS:[0x18]=TEB起始地址<br>FS：[0x18]=TEB.NtTib.Self=address of TIB =address of TEB=FS : 0<br>*FS:0 是段内存的起始地址，FS寄存器指向一个段描述符，<br>    而该描述符又指向段内存的起始地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FS：[0x30]=PEB起始地址</span><br><span class="line">FS:[0x30]=TEB.ProcessEnvironmentBlock=address of PEB</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FS:[0]=SEH起始地址</span><br><span class="line">FS:[0]= PEB.NtTib.ExceptionList=address of SEH</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-Zombies2" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">
