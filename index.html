@@ -163,6 +163,337 @@
 </nav>
       <div class="body-wrap">
   
+    <article id="post-转移指令机器码的计算" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/29/转移指令机器码的计算/" class="article-date">
+  	<time datetime="2019-04-29T12:40:08.000Z" itemprop="datePublished">2019-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/29/转移指令机器码的计算/">
+        转移指令机器码计算
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在软件分析中，需要经常计算转移指令机器码或修改指定的代码，掌握其原理和技巧显得非常有必要。根据转移的距离不同，转移指令可分为以下三类：<br><strong>短转移（Short Jump）：</strong>无条件转移和条件转移的机器码均为2字节，转移的范围是 -128~127字节<br><strong>长转移（Long Jump）：</strong>无条件转移的机器码为5字节，条件转移的机器码为6字节。<br>这是因为：条件转移要用2字节表示其转移类型（如je、jg、jns等），其他4字节表示转移偏移量，而无条件转移仅用1字节就可以表示转移类型（jmp），其他4字节表示转移偏移<br><strong>子程序调用指令（Call）：</strong>Call指令分为两类。<br><em>①一类是我们平时常见的类似于长转移，（例：CALL  00401100)</em><br><em>②另一类调用的参数涉及寄存器、栈等值，比较复杂。（例：CALL dword ptr[eax+2]）</em></p>
+<p>条件转移指令的转移范围是16位模式遗留下来的，CPU开发人员只给目的地址分配了1字节，所以其转移的长度限制在255字节之内。</p>
+<table>
+<thead>
+<tr>
+<th>转移类别</th>
+<th>标志位</th>
+<th>含义</th>
+<th>短转移机器码</th>
+<th>长转移机器码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CALL</td>
+<td>–</td>
+<td>CALL调用指令</td>
+<td>E8xxxxxxxx</td>
+<td>E8xxxxxxxx</td>
+</tr>
+<tr>
+<td>JMP</td>
+<td>–</td>
+<td>无条件转移</td>
+<td>EBxx</td>
+<td>E9xx</td>
+</tr>
+<tr>
+<td>JO</td>
+<td>OF=1</td>
+<td>溢出</td>
+<td>70xx</td>
+<td>0F80xxxxxxxx</td>
+</tr>
+<tr>
+<td>JNO</td>
+<td>OF=0</td>
+<td>无溢出</td>
+<td>71xx</td>
+<td>0F81xxxxxxxx</td>
+</tr>
+<tr>
+<td>JB/JC/JNAE</td>
+<td>CF=1</td>
+<td>低于/进位/不高于等于</td>
+<td>72xx</td>
+<td>0F82xxxxxxxx</td>
+</tr>
+<tr>
+<td>JAE/JNB/JNC</td>
+<td>CF=0</td>
+<td>高于等于/不低于/无进位</td>
+<td>73xx</td>
+<td>0F83xxxxxxxx</td>
+</tr>
+<tr>
+<td>JE/JZ</td>
+<td>ZF=1</td>
+<td>相等/等于0</td>
+<td>74xx</td>
+<td>0F84xxxxxxxx</td>
+</tr>
+<tr>
+<td>JNE/JNZ</td>
+<td>ZF=0</td>
+<td>不相等/不等于0</td>
+<td>75xx</td>
+<td>0F85xxxxxxxx</td>
+</tr>
+<tr>
+<td>JBE/JNA</td>
+<td>CF=1或ZF=1</td>
+<td>低于等于/不高于</td>
+<td>76xx</td>
+<td>0F86xxxxxxxx</td>
+</tr>
+<tr>
+<td>JA/JNBE</td>
+<td>CF=0或ZF=0</td>
+<td>高于/不低于等于</td>
+<td>77xx</td>
+<td>0F87xxxxxxxx</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>SF=1</td>
+<td>符号为负</td>
+<td>78xx</td>
+<td>0F88xxxxxxxx</td>
+</tr>
+<tr>
+<td>JNS</td>
+<td>SF=0</td>
+<td>符号为正</td>
+<td>79xx</td>
+<td>0F89xxxxxxxx</td>
+</tr>
+<tr>
+<td>JP/JPE</td>
+<td>PF=1</td>
+<td>“1”的个数为偶数</td>
+<td>7Axx</td>
+<td>0F8Axxxxxxxx</td>
+</tr>
+<tr>
+<td>JNP/JPO</td>
+<td>PF=0</td>
+<td>“1”的个数为奇数</td>
+<td>7Bxx</td>
+<td>0F8Bxxxxxxxx</td>
+</tr>
+<tr>
+<td>JL/JNGE</td>
+<td>SF≠OF</td>
+<td>小于/不大于等于</td>
+<td>7Cxx</td>
+<td>0F8Cxxxxxxxx</td>
+</tr>
+<tr>
+<td>JGE/JNL</td>
+<td>SF=OF</td>
+<td>大于等于/不小于</td>
+<td>7Dxx</td>
+<td>0F8Dxxxxxxxx</td>
+</tr>
+<tr>
+<td>JLE/JNG</td>
+<td>SF≠OF或ZF=1</td>
+<td>小于等于/不大于</td>
+<td>7Exx</td>
+<td>0F8Exxxxxxxx</td>
+</tr>
+<tr>
+<td>JG/JNLE</td>
+<td>SF=OF且ZF=0</td>
+<td>大于/不小于等于</td>
+<td>7Fxx</td>
+<td>0F8Fxxxxxxxx</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-error" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/28/error/" class="article-date">
+  	<time datetime="2019-04-28T12:57:08.000Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/28/error/">
+        Windows下的异常处理
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>1 异常处理的基本概念</strong><br>Intel公司在386开始的IA-32家族处理器开始，引入了中断（interrupt）和异常（exception）的概念。<br>中断是由外部硬件设备或者 异步事件产生的<br>异常是由于内部事件产生的，可分为故障、陷阱和终止。<br>    故障和陷阱是可恢复的；终止类异常是不可恢复的，如果发生了这种异常，系统就必须重启<br>1.1异常列表<br>异常是应用程序正常执行过程中发生的不正常事件。<br>由CPU引发的异常称为硬件异常，由操作系统或者应用程序引发的异常称为软件异常。<br>常见的异常如下</p>
+<table>
+<thead>
+<tr>
+<th>中断类型号</th>
+<th>类型</th>
+<th>相关指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00</td>
+<td>除数为0时的中断</td>
+<td>DIV、IDIV</td>
+</tr>
+<tr>
+<td>01</td>
+<td>调试异常</td>
+<td>任何指令</td>
+</tr>
+<tr>
+<td>03</td>
+<td>断点中断</td>
+<td>INT3指令</td>
+</tr>
+<tr>
+<td>04</td>
+<td>溢出中断</td>
+<td>INTO</td>
+</tr>
+<tr>
+<td>05</td>
+<td>边界检查</td>
+<td>BOUND</td>
+</tr>
+<tr>
+<td>06</td>
+<td>非法指令故障</td>
+<td>非法指令编码的操作数</td>
+</tr>
+<tr>
+<td>07</td>
+<td>设备不可用</td>
+<td>浮点指令的WAIT</td>
+</tr>
+<tr>
+<td>08</td>
+<td>双重故障</td>
+<td>任何指令</td>
+</tr>
+<tr>
+<td>0A</td>
+<td>无效TSS中断</td>
+<td>JMP、CALL、IRET、中断</td>
+</tr>
+<tr>
+<td>0B</td>
+<td>段不存在异常</td>
+<td>装载段寄存器</td>
+</tr>
+<tr>
+<td>0C</td>
+<td>栈异常</td>
+<td>装载SS寄存器或SS段寻址</td>
+</tr>
+<tr>
+<td>0D</td>
+<td>通用保护异常</td>
+<td>任何特权指令，任何访问存储器的指令</td>
+</tr>
+<tr>
+<td>0E</td>
+<td>页异常</td>
+<td>任何访问存储器的指令</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注：</strong></p>
+<p>CPU能够捕获一个事件并引发一个硬件异常，我们还可以在代码中调用RaiseException()函数来主动引发一个软件异常。程序捕获软件异常的方法和捕获硬件异常的方法完全相同。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void RaiseException(</span><br><span class="line">	DWORD dwExceptionCode,     //标识所引发异常的代码</span><br><span class="line">	DWORD dwExceptionFlags,    //异常是否继续执行的标识</span><br><span class="line">	DWORD nNumberOfArguments,  //附加信息</span><br><span class="line">	CONST DWORD *lpArguments   //附加信息</span><br><span class="line">	)；</span><br></pre></td></tr></table></figure></p>
+<p><strong>2 异常处理的基本过程</strong><br>    Windows正常启动后，将运行在保护模式下，当有中断或异常发生时，CPU会通过中断描述符表（Interrupt Descriptor Table,IDT）来寻找处理函数。IDT是CPU和操作系统交接中断和异常的关口。<br>        <strong><em>（1）IDT</em></strong><br>        IDT是一张位于物理内存中的线性表，共256项。在32位模式下每个IDT项的长度为8字节，在64位模式下每个IDT项的长度为16字节。操作系统在启动阶段会初始化这个表，系统中的每个CPU都有一份IDT的拷贝。<br>        IDT的位置和长度由CPU的IDTR寄存器描述的。IDTR寄存器共有48位，其中高32位是表的基址，低16位是表的长度。可以使用SIDT和LIDT指令来读写该寄存器，但是LIDT是特权指令，只能在Ring0特权级下运行。<br>        IDT的每一项都是一个门结构，它是发生中断或异常时CPU转移控制权的必经之路，包括：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">任务门（Task-gate）描述符：主要用于CPU的任务切换（TSS）功能</span><br><span class="line">中断门（Interrupt-gate）描述符：主要用于描述中断处理程序的入口</span><br><span class="line">陷阱门（Trap-gate）描述符:主要用于描述异常处理程序的入口</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>（2）处理的准备工作</em></strong><br>    当有中断或异常发生时，CPU会根据其中断类型号执行对应的 中断处理程序，也就是执行KiTrapXX函数。异常处理函数在处理本身针对的异常时，通常还会将异常信息进行封装，以便进行后续的其他处理。<br>    封装的内容主要为<strong>异常记录</strong>和<strong>陷阱帧</strong><br>    异常记录包括本次异常的信息，结构定义如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _EXCEPTION_RECORD&#123;</span><br><span class="line">	NTSTATUS ExceptionCode;   //异常代码</span><br><span class="line">	ULONG ExceptionFlags;     //异常标志</span><br><span class="line">	struct _ExCEPTION_RECORD *ExceptionRecord;   //指向另一个EXCEPTION_RECORD的指针</span><br><span class="line">	PVOID ExceptionAddress;   //异常发生地址</span><br><span class="line">	ULONG NumberParameters;   //ExceptionInformation含有的元素数目</span><br><span class="line">	ULONG_PTR ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];   //附加信息</span><br><span class="line">	&#125;EXCEPTION_RECORD;</span><br></pre></td></tr></table></figure></p>
+<p>ExceptionCode定义了异常产生的原因，可以自己定义属于自己的ExceptionCode，自定义代码可以在上文所说的RaiseException中使用<br>    陷阱帧精确描述了异常时线程的状态，次结构与处理器高度相关，因此在不同的平台有不同的定义，该结构一般仅供内核自身或者调试系统使用</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
     <article id="post-4Key" class="article article-type-post" itemscope="" itemprop="blogPost">
   
     <div class="article-meta">

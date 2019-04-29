@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>转移指令机器码计算 | Vegetable</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在软件分析中，需要经常计算转移指令机器码或修改指定的代码，掌握其原理和技巧显得非常有必要。根据转移的距离不同，转移指令可分为以下三类：短转移（Short Jump）：无条件转移和条件转移的机器码均为2字节，转移的范围是 -128~127字节长转移（Long Jump）：无条件转移的机器码为5字节，条件转移的机器码为6字节。这是因为：条件转移要用2字节表示其转移类型（如je、jg、jns等），其他4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转移指令机器码计算">
+<meta property="og:url" content="http://839050222.github.io/2019/04/29/转移指令机器码的计算/index.html">
+<meta property="og:site_name" content="Vegetable">
+<meta property="og:description" content="在软件分析中，需要经常计算转移指令机器码或修改指定的代码，掌握其原理和技巧显得非常有必要。根据转移的距离不同，转移指令可分为以下三类：短转移（Short Jump）：无条件转移和条件转移的机器码均为2字节，转移的范围是 -128~127字节长转移（Long Jump）：无条件转移的机器码为5字节，条件转移的机器码为6字节。这是因为：条件转移要用2字节表示其转移类型（如je、jg、jns等），其他4">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-29T13:16:38.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="转移指令机器码计算">
+<meta name="twitter:description" content="在软件分析中，需要经常计算转移指令机器码或修改指定的代码，掌握其原理和技巧显得非常有必要。根据转移的距离不同，转移指令可分为以下三类：短转移（Short Jump）：无条件转移和条件转移的机器码均为2字节，转移的范围是 -128~127字节长转移（Long Jump）：无条件转移的机器码为5字节，条件转移的机器码为6字节。这是因为：条件转移要用2字节表示其转移类型（如je、jg、jns等），其他4">
+  
+    <link rel="alternative" href="/atom.xml" title="Vegetable" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/head1.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+</head></html>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/head.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Noob</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Noob</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/head.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Noob</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-转移指令机器码的计算" class="article article-type-post" itemscope="" itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2019/04/29/转移指令机器码的计算/" class="article-date">
+  	<time datetime="2019-04-29T12:40:08.000Z" itemprop="datePublished">2019-04-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      转移指令机器码计算
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在软件分析中，需要经常计算转移指令机器码或修改指定的代码，掌握其原理和技巧显得非常有必要。根据转移的距离不同，转移指令可分为以下三类：<br><strong>短转移（Short Jump）：</strong>无条件转移和条件转移的机器码均为2字节，转移的范围是 -128~127字节<br><strong>长转移（Long Jump）：</strong>无条件转移的机器码为5字节，条件转移的机器码为6字节。<br>这是因为：条件转移要用2字节表示其转移类型（如je、jg、jns等），其他4字节表示转移偏移量，而无条件转移仅用1字节就可以表示转移类型（jmp），其他4字节表示转移偏移<br><strong>子程序调用指令（Call）：</strong>Call指令分为两类。<br><em>①一类是我们平时常见的类似于长转移，（例：CALL  00401100)</em><br><em>②另一类调用的参数涉及寄存器、栈等值，比较复杂。（例：CALL dword ptr[eax+2]）</em></p>
+<p>条件转移指令的转移范围是16位模式遗留下来的，CPU开发人员只给目的地址分配了1字节，所以其转移的长度限制在255字节之内。</p>
+<table>
+<thead>
+<tr>
+<th>转移类别</th>
+<th>标志位</th>
+<th>含义</th>
+<th>短转移机器码</th>
+<th>长转移机器码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CALL</td>
+<td>–</td>
+<td>CALL调用指令</td>
+<td>E8xxxxxxxx</td>
+<td>E8xxxxxxxx</td>
+</tr>
+<tr>
+<td>JMP</td>
+<td>–</td>
+<td>无条件转移</td>
+<td>EBxx</td>
+<td>E9xx</td>
+</tr>
+<tr>
+<td>JO</td>
+<td>OF=1</td>
+<td>溢出</td>
+<td>70xx</td>
+<td>0F80xxxxxxxx</td>
+</tr>
+<tr>
+<td>JNO</td>
+<td>OF=0</td>
+<td>无溢出</td>
+<td>71xx</td>
+<td>0F81xxxxxxxx</td>
+</tr>
+<tr>
+<td>JB/JC/JNAE</td>
+<td>CF=1</td>
+<td>低于/进位/不高于等于</td>
+<td>72xx</td>
+<td>0F82xxxxxxxx</td>
+</tr>
+<tr>
+<td>JAE/JNB/JNC</td>
+<td>CF=0</td>
+<td>高于等于/不低于/无进位</td>
+<td>73xx</td>
+<td>0F83xxxxxxxx</td>
+</tr>
+<tr>
+<td>JE/JZ</td>
+<td>ZF=1</td>
+<td>相等/等于0</td>
+<td>74xx</td>
+<td>0F84xxxxxxxx</td>
+</tr>
+<tr>
+<td>JNE/JNZ</td>
+<td>ZF=0</td>
+<td>不相等/不等于0</td>
+<td>75xx</td>
+<td>0F85xxxxxxxx</td>
+</tr>
+<tr>
+<td>JBE/JNA</td>
+<td>CF=1或ZF=1</td>
+<td>低于等于/不高于</td>
+<td>76xx</td>
+<td>0F86xxxxxxxx</td>
+</tr>
+<tr>
+<td>JA/JNBE</td>
+<td>CF=0或ZF=0</td>
+<td>高于/不低于等于</td>
+<td>77xx</td>
+<td>0F87xxxxxxxx</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>SF=1</td>
+<td>符号为负</td>
+<td>78xx</td>
+<td>0F88xxxxxxxx</td>
+</tr>
+<tr>
+<td>JNS</td>
+<td>SF=0</td>
+<td>符号为正</td>
+<td>79xx</td>
+<td>0F89xxxxxxxx</td>
+</tr>
+<tr>
+<td>JP/JPE</td>
+<td>PF=1</td>
+<td>“1”的个数为偶数</td>
+<td>7Axx</td>
+<td>0F8Axxxxxxxx</td>
+</tr>
+<tr>
+<td>JNP/JPO</td>
+<td>PF=0</td>
+<td>“1”的个数为奇数</td>
+<td>7Bxx</td>
+<td>0F8Bxxxxxxxx</td>
+</tr>
+<tr>
+<td>JL/JNGE</td>
+<td>SF≠OF</td>
+<td>小于/不大于等于</td>
+<td>7Cxx</td>
+<td>0F8Cxxxxxxxx</td>
+</tr>
+<tr>
+<td>JGE/JNL</td>
+<td>SF=OF</td>
+<td>大于等于/不小于</td>
+<td>7Dxx</td>
+<td>0F8Dxxxxxxxx</td>
+</tr>
+<tr>
+<td>JLE/JNG</td>
+<td>SF≠OF或ZF=1</td>
+<td>小于等于/不大于</td>
+<td>7Exx</td>
+<td>0F8Exxxxxxxx</td>
+</tr>
+<tr>
+<td>JG/JNLE</td>
+<td>SF=OF且ZF=0</td>
+<td>大于/不小于等于</td>
+<td>7Fxx</td>
+<td>0F8Fxxxxxxxx</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/04/28/error/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Windows下的异常处理</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2019 Noob
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
