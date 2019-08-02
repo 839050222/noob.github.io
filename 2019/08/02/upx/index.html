@@ -24,7 +24,11 @@
 <meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/6.png">
 <meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/7.png">
 <meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/8.png">
-<meta property="og:updated_time" content="2019-08-02T08:11:49.738Z">
+<meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/9.png">
+<meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/10.png">
+<meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/11.png">
+<meta property="og:image" content="http://839050222.github.io/2019/08/02/upx/12.png">
+<meta property="og:updated_time" content="2019-08-02T08:37:10.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="upx">
 <meta name="twitter:description" content="从今天开始，好好的学习一下各种常见壳的脱壳姿势，这篇文章是关于UPX壳的几种脱壳方法。 首先使用PEID查看一下示例文件，显示有UPX壳接下来就开始脱壳方法1：使用OD 载入示例程序，此时加载的入口如图可以发现 有一个pushad 入栈的指令 单步执行一次，查看ESP改变在ESP点击右键，数据窗口跟随,选择一个双字的内存，右键–&amp;gt;在这几个字节上下一个硬件访问断点，字节，字，双字均可，随后直接">
@@ -211,6 +215,7 @@
       
         <p>从今天开始，好好的学习一下各种常见壳的脱壳姿势，这篇文章是关于UPX壳的几种脱壳方法。</p>
 <p>首先使用PEID查看一下示例文件，显示有UPX壳<br><img src="//839050222.github.io/2019/08/02/upx/1.png" alt="图片1"><br>接下来就开始脱壳<br>方法1：<br>使用OD 载入示例程序，此时加载的入口如图<br><img src="//839050222.github.io/2019/08/02/upx/2.png" alt="图片2"><br>可以发现 有一个pushad 入栈的指令 单步执行一次，查看ESP改变<br><img src="//839050222.github.io/2019/08/02/upx/3.png" alt="图片3"><br>在ESP点击右键，数据窗口跟随,选择一个双字的内存，右键–&gt;在这几个字节上下一个硬件访问断点，字节，字，双字均可，<br><img src="//839050222.github.io/2019/08/02/upx/4.png" alt="图片4"><br>随后直接F9运行，有访问这个内存的地方都会停下来。<br>当遇到一个较大跨度的跳转时，基本上就是程序的真正入口了，可以多尝试几次。逆向调试本来就是一个反复摸索的过程。<br>示例程序在几次F9后  停在了一个<strong>CALL  00401000</strong>，经过验证这就是程序的真正入口点，<br><img src="//839050222.github.io/2019/08/02/upx/5.png" alt="图片5"><br>使用OD脱壳，在<strong>CALL 00401000</strong> 上，右键–&gt;&gt;<br><img src="//839050222.github.io/2019/08/02/upx/6.png" alt="图片6"><br><img src="//839050222.github.io/2019/08/02/upx/7.png" alt="图片7"><br>保存名字为  示例文件1 ，使用PEID 再次查看，已显示无壳<br><img src="//839050222.github.io/2019/08/02/upx/8.png" alt="图片8"></p>
+<p>方法2：<br>刚才我们已经知道程序刚开始有一个pushad  这个pushad是用来把当前的寄存器状态保存在栈中的，以便以解密完程序的原代码后还原正确的寄存器状态，从正确的入口处正常运行。<br>所以说既然有入栈 ，为了堆栈平衡 肯定有出栈  popad 。<br>我们可以在程序刚开始便使用CTRL+F 搜索语句  <strong>popad</strong><br><img src="//839050222.github.io/2019/08/02/upx/9.png" alt="图片9"><br>下断点，直接F9运行到这里<br><img src="//839050222.github.io/2019/08/02/upx/10.png" alt="图片10"><br>接下来就是单步执行，遇到一个大距离跳转，应该就是跳到程序入口了。<br>示例程序 popad完后 有一个大距离跳转 <strong>JMP 00401280</strong> ,在这里单步执行跳转后，会发现一个<strong>CALL 00401000</strong>  程序入口找到，使用OD脱壳<br><img src="//839050222.github.io/2019/08/02/upx/11.png" alt="图片11"><br><img src="//839050222.github.io/2019/08/02/upx/12.png" alt="图片12"></p>
 
       
     </div>
